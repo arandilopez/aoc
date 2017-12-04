@@ -4,21 +4,19 @@ module Aoc
     def valid_passphrases(matrix)
       matrix
       .map { |row| row.split }
-      .reduce([] of Array(String)) { |carry, row|
+      .select { |row|
         copy = row.uniq.compact
-        carry << copy if copy == row
-        carry
-      }.compact.size
+        copy == row
+      }.size
     end
 
     def valid_passphrases2(matrix)
       matrix
       .map { |row| row.split }
-      .reduce([] of Array(String)) { |carry, row|
+      .select { |row|
         copy = row.map { |word| word.split("").sort.join("") }.uniq.compact
-        carry << copy if copy.size == row.size
-        carry
-      }.compact.size
+        copy.size == row.size
+      }.size
     end
   end
 end
