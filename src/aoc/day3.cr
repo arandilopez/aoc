@@ -12,8 +12,3 @@ module Aoc
     end
   end
 end
-
-puts Aoc::Day3.steps_from(1)
-puts Aoc::Day3.steps_from(12)
-puts Aoc::Day3.steps_from(23)
-puts Aoc::Day3.steps_from(1024)
