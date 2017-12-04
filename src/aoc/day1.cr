@@ -1,23 +1,32 @@
 module Aoc
   module Day1
     extend self
-    def find_sum(list)
-      sum = 0
-      prev = nil
-      list.each_with_index do |num, index|
-        prev = num if prev.nil?
-        next if index == 0
-        sum += num if prev == num
-        prev = num
+    def sum(list)
+      list.map_with_index { |e, i| [e, i] }.reduce(0) do |carry, el|
+        value, index = el
+        carry += value if ( (list[index + 1] rescue nil) == value)
+        carry += value if (index == (list.size - 1) ) && value == list.first
+        carry
       end
-      if list.first == list.last
-        sum += list.first
+    end
+
+    def sum2(list)
+      step = list.size / 2
+      list.map_with_index { |e, i| [e, i] }.reduce(0) do |carry, element|
+        value, index = element
+        carry += value if value == list[index - step]
+        carry
       end
-      return sum
     end
   end
 end
 
-puts Aoc::Day1.find_sum( "1122".split("").map(&.to_i) )
-puts Aoc::Day1.find_sum( "1234".split("").map(&.to_i) )
-puts Aoc::Day1.find_sum( "1111".split("").map(&.to_i) )
+puts Aoc::Day1.sum( "1122".split("").map(&.to_i) )
+puts Aoc::Day1.sum( "1234".split("").map(&.to_i) )
+puts Aoc::Day1.sum( "1111".split("").map(&.to_i) )
+puts "-"*10
+puts Aoc::Day1.sum2( "1212".split("").map(&.to_i) )
+puts Aoc::Day1.sum2( "1221".split("").map(&.to_i) )
+puts Aoc::Day1.sum2( "123425".split("").map(&.to_i) )
+puts Aoc::Day1.sum2( "123123".split("").map(&.to_i) )
+puts Aoc::Day1.sum2( "12131415".split("").map(&.to_i) )
