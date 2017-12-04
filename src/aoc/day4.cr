@@ -3,7 +3,7 @@ module Aoc
     extend self
     def valid_passphrases(matrix)
       matrix.map { |row| row.split }
-        .select { |row| row == row.uniq.compact}.size
+        .select { |row| row == row.uniq.compact }.size
     end
 
     def valid_passphrases2(matrix)
